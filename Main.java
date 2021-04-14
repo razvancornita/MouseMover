@@ -15,10 +15,12 @@ public class Main {
 
     private static void moveUntilEndOfDay() throws InterruptedException, AWTException {
         //TODO: change first parameter of LocalTime.of() method to specify the hour you want to stop
-        LocalTime finishTime = LocalTime.of(18, random.nextInt(60), random.nextInt(60));
+        LocalTime finishTime = LocalTime.of(19, random.nextInt(30), random.nextInt(60));
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         Robot robot = new Robot();
         while (finishTime.isAfter(LocalTime.now())) {
-            printLogMessage(LocalTime.now().until(finishTime, ChronoUnit.MINUTES) + " minutes left..");
+            printLogMessage(LocalTime.now().until(finishTime, ChronoUnit.MINUTES) + " minutes left. End time: " +
+                    finishTime.format(timeFormatter));
             moveMouse(robot);
         }
     }
